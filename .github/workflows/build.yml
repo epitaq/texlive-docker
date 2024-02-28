@@ -43,6 +43,6 @@ jobs:
         # context: ./frontend
         push: true
         tags: |
-          ghcr.io/${{ github.repository_owner }}/texlive:latest
+          # ghcr.io/${{ github.repository_owner }}/texlive:latest
           ${{ steps.meta.outputs.tags }} 
         platforms: linux/amd64,linux/arm64
