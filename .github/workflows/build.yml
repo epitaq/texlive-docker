@@ -26,7 +26,7 @@ jobs:
       id: meta
       with:
         images: |
-          # ghcr.io/epitaq/texlive
+          ghcr.io/epitaq/texlive
           epita/texlive
         tags: |
           type=semver,pattern={{version}}
