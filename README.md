@@ -35,7 +35,7 @@ LuaLaTeXのフォントキャッシュ用にボリュームを使用していま
 docker run -it \
   --mount type=bind,src=$(pwd),dst=/workdir \
   --mount type=volume,src=ltcache,dst=/usr/local/texlive/2023/texmf-var/luatex-cache \
-  epita/texlive:0.1.2 \
+  epita/texlive:latest \
   llmk a_ken7.tex
 ```
 
