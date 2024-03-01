@@ -25,8 +25,12 @@ jobs:
       uses: docker/metadata-action@v5
       id: meta
       with:
+<<<<<<< HEAD
         images: |
           ghcr.io/${{ github.actor }}/texlive
+=======
+        images: ghcr.io/${{ github.repository_owner }}/texlive
+>>>>>>> parent of 52af688 (認証通らん)
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
@@ -45,5 +49,11 @@ jobs:
       with:
         # context: ./frontend
         push: true
+<<<<<<< HEAD
         tags: ${{ steps.meta.outputs.tags }} 
+=======
+        tags: |
+          ghcr.io/${{ github.repository_owner }}/texlive:latest
+          ${{ steps.meta.outputs.tags }} 
+>>>>>>> parent of 52af688 (認証通らん)
         platforms: linux/amd64,linux/arm64
