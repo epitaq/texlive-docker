@@ -13,47 +13,41 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
 
     - name: Set up Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Get tag 
       uses: docker/metadata-action@v5
       id: meta
       with:
-<<<<<<< HEAD
         images: |
-          ghcr.io/${{ github.actor }}/texlive
-=======
-        images: ghcr.io/${{ github.repository_owner }}/texlive
->>>>>>> parent of 52af688 (認証通らん)
+          ghcr.io/epitaq/texlive
+          epita/texlive
         tags: |
           type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
-          type=semver,pattern={{major}}
           latest
 
     - name: Login to GitHub Container Registry
-      uses: docker/login-action@v1
+      uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ github.token }}
+        password: ${{ secrets.PAT_GHCR }}
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v5
       with:
-        # context: ./frontend
-        push: true
-<<<<<<< HEAD
-        tags: ${{ steps.meta.outputs.tags }} 
-=======
-        tags: |
-          ghcr.io/${{ github.repository_owner }}/texlive:latest
-          ${{ steps.meta.outputs.tags }} 
->>>>>>> parent of 52af688 (認証通らん)
+        context: .
         platforms: linux/amd64,linux/arm64
+        push: true
+        tags: ${{ steps.meta.outputs.tags }} 
