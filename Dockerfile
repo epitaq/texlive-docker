@@ -3,33 +3,33 @@
 
 FROM buildpack-deps:bookworm-scm
 
-# ENV TL_VERSION      2023
-# ENV TL_PATH         /usr/local/texlive
+ENV TL_VERSION      2023
+ENV TL_PATH         /usr/local/texlive
 
 WORKDIR /texlive-install
 
-# COPY ./texlive.profile .
+COPY ./texlive.profile .
 
-# # Install TeX Live
-# RUN mkdir install-tl-unx && \
-#     wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
-#     tar -xz -C ./install-tl-unx --strip-components=1 && \
-#     ./install-tl-unx/install-tl -profile texlive.profile -repository http://mirror.ctan.org/systems/texlive/tlnet/ && \
-#     rm -rf *
+# Install TeX Live
+RUN mkdir install-tl-unx && \
+    wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
+    tar -xz -C ./install-tl-unx --strip-components=1 && \
+    ./install-tl-unx/install-tl -profile texlive.profile -repository http://mirror.ctan.org/systems/texlive/tlnet/ && \
+    rm -rf *
 
-# # add path
-# RUN /usr/local/texlive/????/bin/*/tlmgr path add
+# add path
+RUN /usr/local/texlive/????/bin/*/tlmgr path add
 
-# # Re-index LuaTeX font database
-# RUN luaotfload-tool -u -f
+# Re-index LuaTeX font database
+RUN luaotfload-tool -u -f
 
-# # Install llmk
-# RUN \
-#     wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
-#     chmod +x /usr/local/bin/llmk
+# Install llmk
+RUN \
+    wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
+    chmod +x /usr/local/bin/llmk
 
-# VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache"]
+VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache"]
 
-# WORKDIR /workdir
+WORKDIR /workdir
 
-# CMD ["llmk"]
+CMD ["llmk"]
