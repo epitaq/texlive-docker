@@ -15,7 +15,6 @@ RUN mkdir install-tl-unx && \
     wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
     tar -xz -C ./install-tl-unx --strip-components=1 && \
     ./install-tl-unx/install-tl -profile texlive.profile -repository http://mirror.ctan.org/systems/texlive/tlnet/ && \
-    rm -rf *
 
 # add path
 RUN /usr/local/texlive/????/bin/*/tlmgr path add
