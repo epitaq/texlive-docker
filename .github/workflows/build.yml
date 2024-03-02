@@ -1,6 +1,7 @@
 name: Build and Push Multi-Platform Docker Images on Tag Push
 
 on:
+  workflow_dispatch:
   push:
     branches-ignore:
       - '**'
