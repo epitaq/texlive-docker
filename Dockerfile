@@ -24,8 +24,7 @@ RUN /usr/local/texlive/????/bin/*/tlmgr path add
 RUN luaotfload-tool -u -f
 
 # Install llmk
-RUN \
-    wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
+RUN wget -q -O /usr/local/bin/llmk https://raw.githubusercontent.com/wtsnjp/llmk/master/llmk.lua && \
     chmod +x /usr/local/bin/llmk
 
 VOLUME ["/usr/local/texlive/${TL_VERSION}/texmf-var/luatex-cache"]
